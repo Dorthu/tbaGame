@@ -5,13 +5,9 @@ import (
 	"log"
 
 	"github.com/jroimartin/gocui"
+
+	"github.com/dorthu/tbaGame/game"
 )
-
-type Point struct {
-	x, y int
-}
-
-var playerLoc Point = Point{x: 2, y: 4}
 
 func main() {
 	g, err := gocui.NewGui(gocui.OutputNormal)
@@ -27,6 +23,22 @@ func main() {
 	}
 
 	if err := g.SetKeybinding("", gocui.KeySpace, gocui.ModNone, showText); err != nil {
+		log.Panicln(err)
+	}
+
+	if err := g.SetKeybinding("", gocui.KeyArrowUp, gocui.ModNone, game.MoveUp); err != nil {
+		log.Panicln(err)
+	}
+
+	if err := g.SetKeybinding("", gocui.KeyArrowRight, gocui.ModNone, game.MoveRight); err != nil {
+		log.Panicln(err)
+	}
+
+	if err := g.SetKeybinding("", gocui.KeyArrowDown, gocui.ModNone, game.MoveDown); err != nil {
+		log.Panicln(err)
+	}
+
+	if err := g.SetKeybinding("", gocui.KeyArrowLeft, gocui.ModNone, game.MoveLeft); err != nil {
 		log.Panicln(err)
 	}
 
@@ -48,12 +60,12 @@ func terrainView(g *gocui.Gui) error {
 	cornerX := middleX - 5
 	/// width = 6, height = 10
 
-	if v, err := g.SetView("terrain", cornerX, 0, cornerX+10, 6); err != nil {
+	if _, err := g.SetView("terrain", cornerX, 0, cornerX+10, 6); err != nil {
 		if err != gocui.ErrUnknownView {
 			return err
 		}
 
-		drawRoom(g, v)
+		game.DrawRoom(g)
 	}
 
 	return nil
@@ -78,6 +90,7 @@ func dialogView(g *gocui.Gui) error {
 	return nil
 }
 
+/// updating display funcs
 func showText(g *gocui.Gui, v *gocui.View) error {
 	v, err := g.View("dialog")
 
@@ -87,38 +100,6 @@ func showText(g *gocui.Gui, v *gocui.View) error {
 
 	v.Clear()
 	fmt.Fprint(v, "Changed it")
-
-	return nil
-}
-
-/// draws the room
-func drawRoom(g *gocui.Gui, v *gocui.View) error {
-	buf, err := g.View("terrain")
-
-	if err != nil {
-		return err
-	}
-
-	buf.Clear()
-
-	roomLines := [5][9]rune{
-		{'+', '-', '-', '-', '-', '-', '-', '-', '+'},
-		{'|', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '|'},
-		{'|', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '|'},
-		{'|', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '|'},
-		{'+', '-', '-', '-', '-', '-', '-', '-', '+'},
-	}
-
-	for i := 0; i < 5; i++ {
-		for j := 0; j < 9; j++ {
-			if playerLoc.x == i && playerLoc.y == j {
-				fmt.Fprint(buf, "x")
-			} else {
-				fmt.Fprint(buf, string(roomLines[i][j]))
-			}
-		}
-		fmt.Fprintln(buf, "")
-	}
 
 	return nil
 }
