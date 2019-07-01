@@ -1,26 +1,73 @@
 package game
 
+import (
+	"fmt"
+	"gopkg.in/yaml.v2"
+	"io/ioutil"
+)
+
+type colorType string
+
+const (
+	ColorRed    = "\u001b[31m"
+	ColorBlue   = "\u001b[34m"
+	ColorGreen  = "\u001b[32m"
+	ColorYellow = "\u001b[33m"
+	ColorWhite  = "\u001b[37m"
+	ColorReset  = "\u001b[0m"
+)
+
 type Space struct {
-	char  rune
-	solid bool
+	Char  string `yaml:char`
+	Solid bool   `yaml:solid`
+	// description string
+	Color colorType `yaml:color`
 }
 
 type Room struct {
-	grid [5][9]Space
+	Grid [5][9]Space `yaml:grid`
 }
 
-var testRoom = Room{grid: [5][9]Space{
-	{{'+', true}, {'-', true}, {'-', true}, {'-', true}, {'-', true}, {'-', true}, {'-', true}, {'-', true}, {'+', true}},
-	{{'|', true}, {' ', false}, {' ', false}, {' ', false}, {' ', false}, {' ', false}, {' ', false}, {' ', false}, {'|', true}},
-	{{'|', true}, {' ', false}, {' ', false}, {' ', false}, {' ', false}, {' ', false}, {' ', false}, {' ', false}, {'|', true}},
-	{{'|', true}, {' ', false}, {' ', false}, {' ', false}, {' ', false}, {' ', false}, {' ', false}, {' ', false}, {'|', true}},
-	{{'+', true}, {'-', true}, {'-', true}, {'-', true}, {'-', true}, {'-', true}, {'-', true}, {'-', true}, {'+', true}},
-}}
+/// var testRoom = Room{grid: [5][9]Space{
+/// 	{{'+', true}, {'-', true}, {'-', true}, {'-', true}, {'-', true}, {'-', true}, {'-', true}, {'-', true}, {'+', true}},
+/// 	{{'|', true}, {' ', false}, {' ', false}, {' ', false}, {' ', false}, {' ', false}, {' ', false}, {' ', false}, {'|', true}},
+/// 	{{'|', true}, {' ', false}, {' ', false}, {' ', false}, {' ', false}, {' ', false}, {' ', false}, {' ', false}, {'|', true}},
+/// 	{{'|', true}, {' ', false}, {' ', false}, {' ', false}, {' ', false}, {' ', false}, {' ', false}, {' ', false}, {'|', true}},
+/// 	{{'+', true}, {'-', true}, {'-', true}, {'-', true}, {'-', true}, {'-', true}, {'-', true}, {'-', true}, {'+', true}},
+/// }}
 
-var currentRoom Room = testRoom
+var testRoom Room
+
+func doSetup() error {
+	testRoom.load()
+	return nil
+}
+
+var _ = doSetup()
+
+func (r *Room) load() *Room {
+	raw_yaml, err := ioutil.ReadFile("testRoom.yaml")
+
+	if err != nil {
+		panic(err)
+	}
+
+	err = yaml.Unmarshal(raw_yaml, r)
+	fmt.Println(raw_yaml)
+
+	if err != nil {
+		panic(err)
+	}
+
+	fmt.Println(r)
+
+	return r
+}
+
+// var currentRoom Room = testRoom
 
 func GetRoom() *Room {
-	return &currentRoom
+	return &testRoom
 }
 
 /// methods of Room
@@ -29,7 +76,7 @@ func (r *Room) spaceFree(loc Point) bool {
 		return false
 	}
 
-	if r.grid[loc.x][loc.y].solid {
+	if r.Grid[loc.x][loc.y].Solid {
 		return false
 	}
 

@@ -1,0 +1,117 @@
+version: 0
+type: room
+grid:
+      - - char: '+'
+          solid: true
+          color: white
+        - char: '-'
+          solid: true
+          color: white
+        - char: '-'
+          solid: true
+          color: white
+        - char: '-'
+          solid: true
+          color: white
+        - char: '-'
+          solid: true
+          color: white
+        - char: '-'
+          solid: true
+          color: white
+        - char: '-'
+          solid: true
+          color: white
+        - char: '-'
+          solid: true
+          color: white
+        - char: '+'
+          solid: true
+          color: white
+      - - char: '|'
+          solid: true
+          color: white
+        - char: ' '
+          color: white
+        - char: ' '
+          color: white
+        - char: ' '
+          color: white
+        - char: ' '
+          color: white
+        - char: ' '
+          color: white
+        - char: ' '
+          color: white
+        - char: ' '
+          color: white
+        - char: '|'
+          solid: true
+          color: white
+      - - char: '|'
+          solid: true
+          color: white
+        - char: ' '
+          color: white
+        - char: ' '
+          color: white
+        - char: ' '
+          color: white
+        - char: ' '
+          color: white
+        - char: ' '
+          color: white
+        - char: ' '
+          color: white
+        - char: ' '
+          color: white
+        - char: '|'
+          solid: true
+          color: white
+      - - char: '|'
+          solid: true
+          color: white
+        - char: ' '
+          color: white
+        - char: ' '
+          color: white
+        - char: ' '
+          color: white
+        - char: ' '
+          color: white
+        - char: ' '
+          color: white
+        - char: ' '
+          color: white
+        - char: ' '
+          color: white
+        - char: '|'
+          solid: true
+          color: white
+      - - char: '+'
+          solid: true
+          color: white
+        - char: '-'
+          solid: true
+          color: white
+        - char: '-'
+          solid: true
+          color: white
+        - char: '-'
+          solid: true
+          color: white
+        - char: '-'
+          solid: true
+          color: white
+        - char: '-'
+          solid: true
+          color: white
+        - char: '-'
+          solid: true
+          color: white
+        - char: '-'
+          solid: true
+          color: white
+        - char: '+'
+          solid: true
+          color: white
