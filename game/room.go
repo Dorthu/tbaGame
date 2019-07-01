@@ -77,13 +77,10 @@ func (r *Room) load() *Room {
 	}
 
 	err = yaml.Unmarshal(raw_yaml, r)
-	fmt.Println(raw_yaml)
 
 	if err != nil {
 		panic(err)
 	}
-
-	fmt.Println(r)
 
 	return r
 }
