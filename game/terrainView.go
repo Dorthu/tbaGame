@@ -21,10 +21,10 @@ func DrawRoom(g *gocui.Gui) error {
 	for i := 0; i < 5; i++ {
 		for j := 0; j < 9; j++ {
 			if player.loc.x == i && player.loc.y == j {
-				fmt.Fprint(buf, "\u001b[31m"+string(player.facing.char)+"\u001b[0m")
+				fmt.Fprint(buf, string(ColorRed)+string(player.facing.char)+string(ColorReset))
 			} else {
-				/// TODO: use the Space's color
-				fmt.Fprint(buf, "\u001b[32m"+string(room.Grid[i][j].Char)+"\u001b[0m")
+				space := room.Grid[i][j]
+				fmt.Fprint(buf, string(space.Color)+string(space.Char)+string(ColorReset))
 			}
 		}
 		fmt.Fprintln(buf, "")

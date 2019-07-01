@@ -1,6 +1,7 @@
 package game
 
 import (
+	"errors"
 	"fmt"
 	"gopkg.in/yaml.v2"
 	"io/ioutil"
@@ -16,6 +17,29 @@ const (
 	ColorWhite  = "\u001b[37m"
 	ColorReset  = "\u001b[0m"
 )
+
+func (c *colorType) UnmarshalYAML(unmarshal func(interface{}) error) error {
+	var raw string
+	if err := unmarshal(&raw); err != nil {
+		return err
+	}
+	color := colorType(raw)
+
+	switch color {
+	case "white":
+		*c = ColorWhite
+	case "red":
+		*c = ColorRed
+	case "green":
+		*c = ColorGreen
+	case "blue":
+		*c = ColorBlue
+	default:
+		return errors.New(fmt.Sprintf("Invalid color: %s", raw))
+	}
+
+	return nil
+}
 
 type Space struct {
 	Char  string `yaml:char`

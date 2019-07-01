@@ -12,13 +12,13 @@ grid:
           color: white
         - char: '-'
           solid: true
-          color: white
+          color: red
         - char: '-'
           solid: true
-          color: white
+          color: blue
         - char: '-'
           solid: true
-          color: white
+          color: green
         - char: '-'
           solid: true
           color: white
@@ -32,19 +32,12 @@ grid:
           solid: true
           color: white
         - char: ' '
-          color: white
         - char: ' '
-          color: white
         - char: ' '
-          color: white
         - char: ' '
-          color: white
         - char: ' '
-          color: white
         - char: ' '
-          color: white
         - char: ' '
-          color: white
         - char: '|'
           solid: true
           color: white
@@ -52,19 +45,12 @@ grid:
           solid: true
           color: white
         - char: ' '
-          color: white
         - char: ' '
-          color: white
         - char: ' '
-          color: white
         - char: ' '
-          color: white
         - char: ' '
-          color: white
         - char: ' '
-          color: white
         - char: ' '
-          color: white
         - char: '|'
           solid: true
           color: white
@@ -72,19 +58,12 @@ grid:
           solid: true
           color: white
         - char: ' '
-          color: white
         - char: ' '
-          color: white
         - char: ' '
-          color: white
         - char: ' '
-          color: white
         - char: ' '
-          color: white
         - char: ' '
-          color: white
         - char: ' '
-          color: white
         - char: '|'
           solid: true
           color: white
