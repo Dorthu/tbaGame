@@ -42,6 +42,9 @@ func main() {
 		log.Panicln(err)
 	}
 
+	/// let's get it started
+	game.SetRoom("testRoom2.yaml", g)
+
 	if err := g.MainLoop(); err != nil && err != gocui.ErrQuit {
 		log.Panicln(err)
 	}

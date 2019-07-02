@@ -3,8 +3,6 @@ package game
 import (
 	"errors"
 	"fmt"
-	"gopkg.in/yaml.v2"
-	"io/ioutil"
 )
 
 type colorType string
@@ -52,35 +50,10 @@ type Room struct {
 	Grid [5][9]Space `yaml:grid`
 }
 
-var testRoom Room
-
-func doSetup() error {
-	testRoom.load()
-	return nil
-}
-
-var _ = doSetup()
-
-func (r *Room) load() *Room {
-	raw_yaml, err := ioutil.ReadFile("testRoom.yaml")
-
-	if err != nil {
-		panic(err)
-	}
-
-	err = yaml.Unmarshal(raw_yaml, r)
-
-	if err != nil {
-		panic(err)
-	}
-
-	return r
-}
-
-// var currentRoom Room = testRoom
+var currentRoom Room
 
 func GetRoom() *Room {
-	return &testRoom
+	return &currentRoom
 }
 
 /// methods of Room

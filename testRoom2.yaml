@@ -1,0 +1,73 @@
+version: 1
+type: room
+grid:
+    - - type: corner
+      - type: wall
+      - type: wall
+      - type: wall
+      - type: redWall
+      - type: wall
+      - type: wall
+      - type: wall
+      - type: corner
+    - - type: sidewall
+      - type: empty
+      - type: empty
+      - type: empty
+      - type: secret
+      - type: empty
+      - type: empty
+      - type: empty
+      - type: sidewall
+    - - type: sidewall
+      - type: empty
+      - type: empty
+      - type: empty
+      - type: empty
+      - type: empty
+      - type: empty
+      - type: empty
+      - type: sidewall
+    - - type: sidewall
+      - type: empty
+      - type: empty
+      - type: empty
+      - type: empty
+      - type: empty
+      - type: empty
+      - type: empty
+      - type: sidewall
+    - - type: corner
+      - type: wall
+      - type: wall
+      - type: wall
+      - type: wall
+      - type: wall
+      - type: wall
+      - type: wall
+      - type: corner
+spaces:
+  - type: empty
+    char: " "
+  - type: wall
+    char: '-'
+    color: white
+    solid: true
+  - type: sidewall
+    char: '|'
+    color: white
+    solid: true
+  - type: corner
+    char: '+'
+    solid: true
+    color: white
+  - color: red
+    type: redWall
+    char: "-"
+    solid: true
+    description: >
+      This one's red
+  - type: secret
+    char: " "
+    description: >
+      There's a secret here!

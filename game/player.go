@@ -15,8 +15,9 @@ func (p *Point) inDirection(f *playerFacing) Point {
 }
 
 type Player struct {
-	loc    Point
-	facing playerFacing
+	loc       Point
+	facing    playerFacing
+	inventory Inventory
 }
 
 /// constants

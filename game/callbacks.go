@@ -39,3 +39,10 @@ func Interact(g *gocui.Gui, v *gocui.View) error {
 	DrawDialog(g)
 	return nil
 }
+
+func SetRoom(filename string, g *gocui.Gui) {
+	room := loadRoom(filename)
+
+	currentRoom = *room
+	updateScreen(g)
+}
