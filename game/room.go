@@ -42,23 +42,15 @@ func (c *colorType) UnmarshalYAML(unmarshal func(interface{}) error) error {
 }
 
 type Space struct {
-	Char  string `yaml:char`
-	Solid bool   `yaml:solid`
-	// description string
-	Color colorType `yaml:color`
+	Char        string    `yaml:char`
+	Solid       bool      `yaml:solid`
+	Description string    `yaml: description`
+	Color       colorType `yaml:color`
 }
 
 type Room struct {
 	Grid [5][9]Space `yaml:grid`
 }
-
-/// var testRoom = Room{grid: [5][9]Space{
-/// 	{{'+', true}, {'-', true}, {'-', true}, {'-', true}, {'-', true}, {'-', true}, {'-', true}, {'-', true}, {'+', true}},
-/// 	{{'|', true}, {' ', false}, {' ', false}, {' ', false}, {' ', false}, {' ', false}, {' ', false}, {' ', false}, {'|', true}},
-/// 	{{'|', true}, {' ', false}, {' ', false}, {' ', false}, {' ', false}, {' ', false}, {' ', false}, {' ', false}, {'|', true}},
-/// 	{{'|', true}, {' ', false}, {' ', false}, {' ', false}, {' ', false}, {' ', false}, {' ', false}, {' ', false}, {'|', true}},
-/// 	{{'+', true}, {'-', true}, {'-', true}, {'-', true}, {'-', true}, {'-', true}, {'-', true}, {'-', true}, {'+', true}},
-/// }}
 
 var testRoom Room
 
@@ -93,7 +85,7 @@ func GetRoom() *Room {
 
 /// methods of Room
 func (r *Room) spaceFree(loc Point) bool {
-	if loc.x < 0 || loc.x > 5 || loc.y < 0 || loc.y > 9 {
+	if loc.x < 0 || loc.x > 4 || loc.y < 0 || loc.y > 8 {
 		return false
 	}
 
@@ -102,4 +94,12 @@ func (r *Room) spaceFree(loc Point) bool {
 	}
 
 	return true
+}
+
+func (r *Room) spaceAt(loc Point) *Space {
+	if loc.x < 0 || loc.x > 4 || loc.y < 0 || loc.y > 8 {
+		return nil
+	}
+
+	return &r.Grid[loc.x][loc.y]
 }

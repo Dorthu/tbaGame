@@ -13,12 +13,18 @@ grid:
         - char: '-'
           solid: true
           color: red
+          description: >
+            It's red.
         - char: '-'
           solid: true
           color: blue
+          description: >
+            This one's blue.
         - char: '-'
           solid: true
           color: green
+          description: >
+            This one's green.
         - char: '-'
           solid: true
           color: white
@@ -35,6 +41,8 @@ grid:
         - char: ' '
         - char: ' '
         - char: ' '
+          description: >
+            There's something secret here!
         - char: ' '
         - char: ' '
         - char: ' '

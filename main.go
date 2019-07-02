@@ -22,7 +22,7 @@ func main() {
 		log.Panicln(err)
 	}
 
-	if err := g.SetKeybinding("", gocui.KeySpace, gocui.ModNone, showText); err != nil {
+	if err := g.SetKeybinding("", gocui.KeySpace, gocui.ModNone, game.Interact); err != nil {
 		log.Panicln(err)
 	}
 
@@ -86,20 +86,6 @@ func dialogView(g *gocui.Gui) error {
 		v.Wrap = true
 		fmt.Fprintln(v, "now it does things")
 	}
-
-	return nil
-}
-
-/// updating display funcs
-func showText(g *gocui.Gui, v *gocui.View) error {
-	v, err := g.View("dialog")
-
-	if err != nil {
-		return err
-	}
-
-	v.Clear()
-	fmt.Fprint(v, "Changed it")
 
 	return nil
 }

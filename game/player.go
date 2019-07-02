@@ -10,6 +10,10 @@ type playerFacing struct {
 	char rune
 }
 
+func (p *Point) inDirection(f *playerFacing) Point {
+	return Point{x: p.x + f.x, y: p.y + f.y}
+}
+
 type Player struct {
 	loc    Point
 	facing playerFacing
@@ -17,9 +21,9 @@ type Player struct {
 
 /// constants
 var FacingUp playerFacing = playerFacing{-1, 0, '^'}
-var FacingRight playerFacing = playerFacing{0, -1, '>'}
+var FacingRight playerFacing = playerFacing{0, 1, '>'}
 var FacingDown playerFacing = playerFacing{1, 0, 'v'}
-var FacingLeft playerFacing = playerFacing{0, 1, '<'}
+var FacingLeft playerFacing = playerFacing{0, -1, '<'}
 
 /// the player
 var player Player = Player{loc: Point{x: 2, y: 4}, facing: FacingUp}
@@ -34,4 +38,19 @@ func (p *Player) move(deltaX int, deltaY int, newFacing playerFacing) {
 	}
 
 	p.facing = newFacing
+}
+
+func (p *Player) interact() {
+	room := GetRoom()
+
+	space := room.spaceAt(p.loc.inDirection(&p.facing))
+
+	if space == nil {
+		return
+	}
+
+	/// update text
+	if space.Description != "" {
+		SetText(space.Description)
+	}
 }
