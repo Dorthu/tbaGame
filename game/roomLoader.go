@@ -12,10 +12,12 @@ type roomSpec struct {
 	Version int            `yaml:version`
 	Grid    [5][9]gridSpec `yaml:grid`
 	Spaces  []spaceSpec    `yaml:spaces`
+	Items   []Item         `yaml:items`
 }
 
 type gridSpec struct {
 	SpaceType string `yaml:"type"`
+	Has       string `yaml:has`
 }
 
 type spaceSpec struct {
@@ -56,6 +58,16 @@ func loadRoom(filename string) *Room {
 	return r
 }
 
+func (spec *roomSpec) getItem(name string) *Item {
+	for _, item := range spec.Items {
+		if item.Name == name {
+			return &item
+		}
+	}
+
+	panic(fmt.Sprintf("No item named %s", name))
+}
+
 func (spec *roomSpec) toRoom() *Room {
 	var r Room
 
@@ -74,6 +86,12 @@ func (spec *roomSpec) toRoom() *Room {
 			}
 
 			r.Grid[i][j] = cellSpec.makeSpace()
+
+			if cell.Has != "" {
+				heldItem := spec.getItem(cell.Has)
+
+				r.Grid[i][j].CurItem = heldItem
+			}
 		}
 	}
 

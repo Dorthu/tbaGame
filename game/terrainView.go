@@ -24,7 +24,12 @@ func DrawRoom(g *gocui.Gui) error {
 				fmt.Fprint(buf, string(ColorRed)+string(player.facing.char)+string(ColorReset))
 			} else {
 				space := room.Grid[i][j]
-				fmt.Fprint(buf, string(space.Color)+string(space.Char)+string(ColorReset))
+				if space.CurItem != nil {
+					item := space.CurItem
+					fmt.Fprint(buf, string(item.Color)+string(item.Overworld)+string(ColorReset))
+				} else {
+					fmt.Fprint(buf, string(space.Color)+string(space.Char)+string(ColorReset))
+				}
 			}
 		}
 		fmt.Fprintln(buf, "")

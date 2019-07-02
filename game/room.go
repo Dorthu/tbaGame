@@ -32,6 +32,8 @@ func (c *colorType) UnmarshalYAML(unmarshal func(interface{}) error) error {
 		*c = ColorGreen
 	case "blue":
 		*c = ColorBlue
+	case "yellow":
+		*c = ColorYellow
 	default:
 		return errors.New(fmt.Sprintf("Invalid color: %s", raw))
 	}
@@ -40,10 +42,11 @@ func (c *colorType) UnmarshalYAML(unmarshal func(interface{}) error) error {
 }
 
 type Space struct {
-	Char        string    `yaml:char`
-	Solid       bool      `yaml:solid`
-	Description string    `yaml: description`
-	Color       colorType `yaml:color`
+	Char        string
+	Solid       bool
+	Description string
+	Color       colorType
+	CurItem     *Item
 }
 
 type Room struct {

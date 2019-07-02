@@ -1,5 +1,7 @@
 package game
 
+import "fmt"
+
 /// type definitions
 type Point struct {
 	x, y int
@@ -50,8 +52,13 @@ func (p *Player) interact() {
 		return
 	}
 
-	/// update text
-	if space.Description != "" {
+	item := space.CurItem
+	if item != nil {
+		_ = append(p.inventory.Items, item)
+		space.CurItem = nil
+		SetText(fmt.Sprintf("Got %s!", item.Name))
+	} else if space.Description != "" {
 		SetText(space.Description)
 	}
+
 }

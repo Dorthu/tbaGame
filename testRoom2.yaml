@@ -36,6 +36,7 @@ grid:
       - type: empty
       - type: empty
       - type: empty
+        has: key
       - type: sidewall
     - - type: corner
       - type: wall
@@ -71,3 +72,10 @@ spaces:
     char: " "
     description: >
       There's a secret here!
+items:
+  - name: key
+    description: >
+      A key to something.
+    img: "o=w"
+    color: yellow
+    overworld: '*'
