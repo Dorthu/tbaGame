@@ -21,11 +21,12 @@ type gridSpec struct {
 }
 
 type spaceSpec struct {
-	SpaceType   string    `yaml:"type"`
-	Char        string    `yaml:"char"`
-	Solid       bool      `yaml:"solid"`
-	Color       colorType `yaml:"color"`
-	Description string    `yaml:"description"`
+	SpaceType   string              `yaml:"type"`
+	Char        string              `yaml:"char"`
+	Solid       bool                `yaml:"solid"`
+	Color       colorType           `yaml:"color"`
+	Description string              `yaml:"description"`
+	Background  backgroundColorType `yaml:background`
 }
 
 func (s *spaceSpec) makeSpace() Space {
@@ -34,6 +35,7 @@ func (s *spaceSpec) makeSpace() Space {
 		Solid:       s.Solid,
 		Color:       s.Color,
 		Description: s.Description,
+		Background:  s.Background,
 	}
 }
 

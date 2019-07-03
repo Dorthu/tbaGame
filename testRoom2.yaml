@@ -50,6 +50,7 @@ grid:
 spaces:
   - type: empty
     char: " "
+    background: green
   - type: wall
     char: '-'
     color: white
