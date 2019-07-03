@@ -1,0 +1,100 @@
+version: 1
+type: room
+spaces:
+  - type: grass
+    background: green
+    char: " "
+  - type: fencePost
+    background: green
+    color: white
+    char: "+"
+    solid: true
+    description: >
+      An aged white picket fence.  Was probably very nice back in the day.
+  - type: fenceVert
+    background: green
+    color: white
+    char: "|"
+    solid: true
+    description: >
+      An aged white picket fence.  Was probably very nice back in the day.
+  - type: fenceHor
+    color: white
+    background: green
+    char: "-"
+    solid: true
+    description: >
+      An aged white picket fence.  Was probably very nice back in the day.
+  - type: house
+    background: blue
+    color: white
+    char: "="
+    solid: true
+    description: >
+      The house is old, but not uncared for.
+  - type: door
+    color: white
+    background: blue
+    char: "H"
+    solid: true
+    description: >
+      The front door.  Very locked.
+  - type: flower
+    background: green
+    color: yellow
+    char: "*"
+    description: >
+      Nicely arranged flowers make the house look oddly welcoming.
+  - type: flower2
+    background: green
+    color: yellow
+    char: "^"
+    description: >
+      Nicely arranged flowers make the house look oddly welcoming.
+items:
+grid:
+  - - type: fencePost
+    - type: house
+    - type: house
+    - type: house
+    - type: door
+    - type: house
+    - type: house
+    - type: house
+    - type: fencePost
+  - - type: fenceVert
+    - type: flower
+    - type: flower2
+    - type: flower
+    - type: grass
+    - type: flower
+    - type: flower2
+    - type: flower
+    - type: fenceVert
+  - - type: fenceVert
+    - type: flower2
+    - type: flower
+    - type: flower2
+    - type: grass
+    - type: flower2
+    - type: flower
+    - type: flower2
+    - type: fenceVert
+  - - type: fencePost
+    - type: fenceHor
+    - type: fencePost
+    - type: grass
+    - type: grass
+    - type: grass
+    - type: fencePost
+    - type: fenceHor
+    - type: fencePost
+  - - type: grass
+    - type: grass
+    - type: grass
+    - type: grass
+    - type: grass
+    - type: grass
+    - type: grass
+    - type: grass
+    - type: grass

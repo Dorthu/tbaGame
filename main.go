@@ -43,7 +43,7 @@ func main() {
 	}
 
 	/// let's get it started
-	game.SetRoom("testRoom2.yaml", g)
+	game.SetRoom("rooms/outside.yaml", g)
 
 	if err := g.MainLoop(); err != nil && err != gocui.ErrQuit {
 		log.Panicln(err)
@@ -87,7 +87,7 @@ func dialogView(g *gocui.Gui) error {
 			return err
 		}
 		v.Wrap = true
-		fmt.Fprintln(v, "now it does things")
+		fmt.Fprintln(v, "Arrow keys: Move.  Space: interact.")
 	}
 
 	return nil
