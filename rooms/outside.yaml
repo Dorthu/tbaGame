@@ -9,22 +9,25 @@ spaces:
     color: white
     char: "+"
     solid: true
-    description: >
-      An aged white picket fence.  Was probably very nice back in the day.
+    description: |
+      An aged white picket fence.  Was
+      probably very nice back in the day.
   - type: fenceVert
     background: green
     color: white
     char: "|"
     solid: true
-    description: >
-      An aged white picket fence.  Was probably very nice back in the day.
+    description: |
+      An aged white picket fence.  Was
+      probably very nice back in the day.
   - type: fenceHor
     color: white
     background: green
     char: "-"
     solid: true
-    description: >
-      An aged white picket fence.  Was probably very nice back in the day.
+    description: |
+      An aged white picket fence.  Was
+      probably very nice back in the day.
   - type: house
     background: blue
     color: white
@@ -52,12 +55,25 @@ spaces:
     description: >
       Nicely arranged flowers make the house look oddly welcoming.
 items:
+    - name: house key
+      overworld: "*"
+      description: >
+        A small key.  Looks like a housekey.
+      img: "O=w"
+      color: yellow
 grid:
   - - type: fencePost
     - type: house
     - type: house
     - type: house
     - type: door
+      action:
+        needs: house key
+        changechar: " "
+        changesolid: true
+        spacetrigger: loadRoom foyar.yaml
+        message: >
+          Unlocked the door!
     - type: house
     - type: house
     - type: house
@@ -79,6 +95,7 @@ grid:
     - type: flower2
     - type: flower
     - type: flower2
+      has: house key
     - type: fenceVert
   - - type: fencePost
     - type: fenceHor

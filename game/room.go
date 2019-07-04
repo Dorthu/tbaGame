@@ -7,6 +7,7 @@ type Space struct {
 	Color       colorType
 	Background  backgroundColorType
 	CurItem     *Item
+	Action      *Action
 }
 
 type Room struct {

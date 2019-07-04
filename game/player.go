@@ -53,10 +53,13 @@ func (p *Player) interact() {
 	}
 
 	item := space.CurItem
+	action := space.Action
 	if item != nil {
-		_ = append(p.inventory.Items, item)
+		p.inventory.Items = append(p.inventory.Items, item)
 		space.CurItem = nil
 		SetText(fmt.Sprintf("Got %s!", item.Name))
+	} else if action != nil && action.execute(space, p) {
+		/// pass
 	} else if space.Description != "" {
 		SetText(space.Description)
 	}

@@ -16,8 +16,9 @@ type roomSpec struct {
 }
 
 type gridSpec struct {
-	SpaceType string `yaml:"type"`
-	Has       string `yaml:has`
+	SpaceType string     `yaml:"type"`
+	Has       string     `yaml:has`
+	Action    actionSpec `yaml: action`
 }
 
 type spaceSpec struct {
@@ -29,6 +30,14 @@ type spaceSpec struct {
 	Background  backgroundColorType `yaml:background`
 }
 
+type actionSpec struct {
+	Needs        string `yaml:needs`
+	ChangeChar   string `yaml:changechar`
+	ChangeSolid  bool   `yaml:changesolid`
+	SpaceTrigger string `yaml:spacetrigger`
+	Message      string `yaml:message`
+}
+
 func (s *spaceSpec) makeSpace() Space {
 	return Space{
 		Char:        s.Char,
@@ -36,6 +45,23 @@ func (s *spaceSpec) makeSpace() Space {
 		Color:       s.Color,
 		Description: s.Description,
 		Background:  s.Background,
+	}
+}
+
+func (a *actionSpec) makeAction(spec *roomSpec) Action {
+	var neededItem *Item = nil
+
+	if a.Needs != "" {
+		neededItem = spec.getItem(a.Needs)
+	}
+
+	return Action{
+		Needs:        neededItem,
+		NewChar:      a.ChangeChar,
+		ChangeSolid:  a.ChangeSolid,
+		SpaceTrigger: a.SpaceTrigger,
+		Message:      a.Message,
+		executed:     false,
 	}
 }
 
@@ -93,6 +119,12 @@ func (spec *roomSpec) toRoom() *Room {
 				heldItem := spec.getItem(cell.Has)
 
 				r.Grid[i][j].CurItem = heldItem
+			}
+
+			if cell.Action.Needs != "" {
+				action := cell.Action.makeAction(spec)
+
+				r.Grid[i][j].Action = &action
 			}
 		}
 	}
