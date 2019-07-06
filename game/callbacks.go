@@ -44,8 +44,12 @@ func Interact(g *gocui.Gui, v *gocui.View) error {
 }
 
 func SetRoom(filename string, g *gocui.Gui) {
-	room := loadRoom(filename)
+	changeRoom(filename)
+	updateScreen(g)
+}
+
+func changeRoom(filename string) {
+	room := loadRoom("rooms/" + filename)
 
 	currentRoom = *room
-	updateScreen(g)
 }

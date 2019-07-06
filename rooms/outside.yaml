@@ -71,9 +71,11 @@ grid:
         needs: house key
         changechar: " "
         changesolid: true
-        spacetrigger: loadRoom foyar.yaml
         message: >
           Unlocked the door!
+      trigger:
+        effecttype: loadRoom
+        data: foyar.yaml 2 4
     - type: house
     - type: house
     - type: house

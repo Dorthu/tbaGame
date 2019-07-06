@@ -1,12 +1,11 @@
 package game
 
 type Action struct {
-	Needs        *Item
-	NewChar      string
-	ChangeSolid  bool
-	SpaceTrigger string
-	Message      string
-	executed     bool
+	Needs       *Item
+	NewChar     string
+	ChangeSolid bool
+	Message     string
+	executed    bool
 }
 
 /// actually does the thing the action does

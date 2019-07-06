@@ -43,7 +43,7 @@ func main() {
 	}
 
 	/// let's get it started
-	game.SetRoom("rooms/outside.yaml", g)
+	game.SetRoom("outside.yaml", g)
 
 	if err := g.MainLoop(); err != nil && err != gocui.ErrQuit {
 		log.Panicln(err)

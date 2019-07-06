@@ -40,6 +40,12 @@ func (p *Player) move(deltaX int, deltaY int, newFacing playerFacing) {
 		p.loc.y += deltaY
 	}
 
+	space := GetRoom().spaceAt(p.loc)
+
+	if space.Trigger != nil {
+		space.Trigger.fire(p)
+	}
+
 	p.facing = newFacing
 }
 

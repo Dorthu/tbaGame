@@ -8,6 +8,7 @@ type Space struct {
 	Background  backgroundColorType
 	CurItem     *Item
 	Action      *Action
+	Trigger     *Trigger
 }
 
 type Room struct {

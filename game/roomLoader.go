@@ -16,9 +16,10 @@ type roomSpec struct {
 }
 
 type gridSpec struct {
-	SpaceType string     `yaml:"type"`
-	Has       string     `yaml:has`
-	Action    actionSpec `yaml: action`
+	SpaceType string      `yaml:"type"`
+	Has       string      `yaml:has`
+	Action    actionSpec  `yaml: action`
+	Trigger   triggerSpec `yaml:trigger`
 }
 
 type spaceSpec struct {
@@ -31,11 +32,15 @@ type spaceSpec struct {
 }
 
 type actionSpec struct {
-	Needs        string `yaml:needs`
-	ChangeChar   string `yaml:changechar`
-	ChangeSolid  bool   `yaml:changesolid`
-	SpaceTrigger string `yaml:spacetrigger`
-	Message      string `yaml:message`
+	Needs       string `yaml:needs`
+	ChangeChar  string `yaml:changechar`
+	ChangeSolid bool   `yaml:changesolid`
+	Message     string `yaml:message`
+}
+
+type triggerSpec struct {
+	EffectType string `yaml:effecttype`
+	Data       string `yaml:data`
 }
 
 func (s *spaceSpec) makeSpace() Space {
@@ -56,12 +61,29 @@ func (a *actionSpec) makeAction(spec *roomSpec) Action {
 	}
 
 	return Action{
-		Needs:        neededItem,
-		NewChar:      a.ChangeChar,
-		ChangeSolid:  a.ChangeSolid,
-		SpaceTrigger: a.SpaceTrigger,
-		Message:      a.Message,
-		executed:     false,
+		Needs:       neededItem,
+		NewChar:     a.ChangeChar,
+		ChangeSolid: a.ChangeSolid,
+		Message:     a.Message,
+		executed:    false,
+	}
+}
+
+func (t *triggerSpec) makeTrigger() Trigger {
+	var effect effectType = ""
+
+	switch t.EffectType {
+	case effectLoadRoom:
+		effect = effectLoadRoom
+	}
+
+	if effect == "" {
+		panic(fmt.Sprintf("No effect type named %s", t.EffectType))
+	}
+
+	return Trigger{
+		Effect: effect,
+		Data:   t.Data,
 	}
 }
 
@@ -125,6 +147,12 @@ func (spec *roomSpec) toRoom() *Room {
 				action := cell.Action.makeAction(spec)
 
 				r.Grid[i][j].Action = &action
+			}
+
+			if cell.Trigger.EffectType != "" {
+				trigger := cell.Trigger.makeTrigger()
+
+				r.Grid[i][j].Trigger = &trigger
 			}
 		}
 	}
